@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+:root {
+  /* Basil / citrus palette — deliberately not the cream+serif+terracotta
+     or near-black+acid-accent defaults. Ties back to the project-plan PDF's
+     green identity for visual consistency across deliverables. */
+  --cream: #FBF8F2;
+  --basil-50: #EAF3EE;
+  --basil-600: #2F6F5E;
+  --basil-700: #234F42;
+  --basil-900: #14322A;
+  --ink: #1F2937;
+  --ink-soft: #5B6B63;
+  --amber: #E8A33D;
+  --amber-dark: #C97F1F;
+  --line: #DDE7E1;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-basil-50: var(--basil-50);
+  --color-basil-600: var(--basil-600);
+  --color-basil-700: var(--basil-700);
+  --color-basil-900: var(--basil-900);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-amber: var(--amber);
+  --color-amber-dark: var(--amber-dark);
+  --color-line: var(--line);
+  --font-display: 'Space Grotesk', ui-sans-serif, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
