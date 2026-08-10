@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Nav from "../components/Nav";
 import { createClient } from "@/lib/supabase/client";
+import { translateAuthError } from "@/lib/authErrors";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export default function LoginPage() {
 
     setLoading(false);
     if (error) {
-      setError("Giriş yapılamadı. E-posta veya şifreni kontrol et.");
+      setError(translateAuthError(error.message));
       return;
     }
     router.push("/dashboard");

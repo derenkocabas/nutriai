@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Nav from "../components/Nav";
 import { createClient } from "@/lib/supabase/client";
+import { translateAuthError } from "@/lib/authErrors";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -38,7 +39,7 @@ export default function SignupPage() {
 
     setLoading(false);
     if (error) {
-      setError(error.message || "Kayıt oluşturulamadı, tekrar dene.");
+      setError(translateAuthError(error.message));
       return;
     }
     setDone(true);
