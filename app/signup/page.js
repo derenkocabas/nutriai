@@ -30,6 +30,7 @@ export default function SignupPage() {
       email,
       password,
       options: {
+        emailRedirectTo: `${window.location.origin}/auth/confirmed`,
         data: {
           kvkk_consent: true,
           kvkk_consent_at: new Date().toISOString(),
