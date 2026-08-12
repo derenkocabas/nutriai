@@ -28,12 +28,7 @@ export default function LoginPage() {
 
     setLoading(false);
     if (error) {
-      const friendly = translateAuthError(error.message);
-      setError(
-        friendly === "E-posta veya şifre hatalı."
-          ? "Kullanıcı adı veya şifre hatalı."
-          : friendly
-      );
+      setError(translateAuthError(error.message));
       return;
     }
     router.push("/dashboard");

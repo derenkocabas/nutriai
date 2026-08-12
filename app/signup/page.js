@@ -51,12 +51,7 @@ export default function SignupPage() {
 
     setLoading(false);
     if (error) {
-      const friendly = translateAuthError(error.message);
-      setError(
-        friendly === "Bu e-posta adresiyle zaten bir hesap var. Giriş yapmayı dener misin?"
-          ? "Bu kullanıcı adı zaten alınmış. Giriş yapmayı dener misin?"
-          : friendly
-      );
+      setError(translateAuthError(error.message));
       return;
     }
 
