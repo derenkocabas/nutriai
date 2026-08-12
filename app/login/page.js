@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 import Nav from "../components/Nav";
 import { createClient } from "@/lib/supabase/client";
 import { translateAuthError } from "@/lib/authErrors";
+import { usernameToEmail } from "@/lib/username";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,11 +21,19 @@ export default function LoginPage() {
     setError(null);
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email: usernameToEmail(username),
+      password,
+    });
 
     setLoading(false);
     if (error) {
-      setError(translateAuthError(error.message));
+      const friendly = translateAuthError(error.message);
+      setError(
+        friendly === "E-posta veya şifre hatalı."
+          ? "Kullanıcı adı veya şifre hatalı."
+          : friendly
+      );
       return;
     }
     router.push("/dashboard");
@@ -40,14 +49,14 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1.5">E-posta</label>
+              <label className="block text-sm font-medium mb-1.5">Kullanıcı Adı</label>
               <input
-                type="email"
+                type="text"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="w-full rounded-xl border border-line px-4 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-basil-600"
-                placeholder="sen@ornek.com"
+                placeholder="kullanıcı adın"
               />
             </div>
             <div>
